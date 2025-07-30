@@ -9,6 +9,7 @@ import jax.numpy as jnp
 from flax import nnx
 
 import math
+from functools import partial
 
 # jit?
 
@@ -173,6 +174,7 @@ class CTM(nnx.Module):
         current_certainty = jnp.stack([ne, 1 - ne], axis=-1)
         return current_certainty
 
+    @nnx.jit
     def __call__(self, x):
         kv = self.compute_features(x)
 
